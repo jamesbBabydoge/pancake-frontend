@@ -55,10 +55,12 @@ const useEagerConnect = () => {
     const tryLogin = (c: ConnectorNames) => {
       setTimeout(() => login(c))
     }
+    alert("1")
 
     const connectorId = safeGetLocalStorageItem()
 
     if (connectorId) {
+      alert("2")
       const isConnectorBinanceChain = connectorId === ConnectorNames.BSC
       const isBinanceChainDefined = Reflect.has(window, 'BinanceChain')
 
@@ -66,7 +68,7 @@ const useEagerConnect = () => {
       // We must check to see if it exists, and if not, wait for it before proceeding.
       if (isConnectorBinanceChain && !isBinanceChainDefined) {
         _binanceChainListener().then(() => login(connectorId))
-
+        alert("3")
         return
       }
 
@@ -92,7 +94,9 @@ const useEagerConnect = () => {
     } else {
       // Dapp browse will try login even is not authorized.
       injected.isAuthorized().then(() => {
+        alert("4")
         if (isMobile && window.ethereum) {
+          alert("5")
           tryLogin(ConnectorNames.Injected)
         }
       })

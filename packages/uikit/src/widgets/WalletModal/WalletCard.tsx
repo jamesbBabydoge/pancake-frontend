@@ -51,6 +51,7 @@ const WalletCard: React.FC<Props> = ({ login, walletConfig, onDismiss }) => {
           onDismiss();
           return;
         }
+        alert(window.ethereum ? "walletcard available" : "walletcard not available")
         if (!window.ethereum && walletConfig.href) {
           window.open(walletConfig.href, "_blank", "noopener noreferrer");
         } else {
